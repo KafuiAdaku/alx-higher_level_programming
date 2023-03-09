@@ -4,4 +4,4 @@ for i in range(ord('z'), ord('a') - 1, -1):
         subtract = 0
     else:
         subtract = 32
-    print(f"{chr(i - subtract)}", end='')
+    print("{}".format(chr(i - subtract)), end='')

@@ -48,5 +48,8 @@ class Square:
         if self.__size == 0:
             print()
 
-        for i in range(self.__size):
-            print("#" * self.__size)
+        for row in range(self.__size):
+            for col in range(self.__size):
+                if col != self.__size:
+                    print("#", end="")
+            print()

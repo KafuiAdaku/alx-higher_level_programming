@@ -1,8 +1,7 @@
 #!/usr/bin/python3
-"""
-    My square module.
+"""My square module.
     Includes a class 'Square' with multiple methods.
-    """
+"""
 
 
 class Square:

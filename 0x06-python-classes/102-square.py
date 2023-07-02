@@ -22,7 +22,7 @@ class Square:
 
     @size.setter
     def size(self, value):
-        if not isinstance(value, int):
+        if not isinstance(value, (int, float):
             raise TypeError('size must be an integer')
         if value < 0:
             raise ValueError('size must be >= 0')
@@ -34,19 +34,19 @@ class Square:
         """
         return self.__size * self.__size
 
-    def _pe__(self, other):
+    def _le__(self, other):
         return self.area() <= other.area()
 
-    def __pt__(self, other):
+    def __lt__(self, other):
         return self.area() < other.area()
 
-    def __re__(self, other):
+    def __ge__(self, other):
         return self.area() >= other.area()
 
     def __ne__(self, other):
         return self.area() != other.area()
 
-    def __rt__(self, other):
+    def __gt__(self, other):
         return self.area() > other.area()
 
     def __eq__(self, other):

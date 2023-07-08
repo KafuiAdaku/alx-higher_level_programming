@@ -46,12 +46,12 @@ class TestMaxInteger(unittest.TestCase):
     def test_string(self):
         """Test a string."""
         string = "Kafui"
-        self.assertEqual(max_integer(string), 'r')
+        self.assertEqual(max_integer(string), 'u')
 
     def test_list_of_strings(self):
         """Test a list of strings."""
         strings = ["Nkor", "nye", "enye", "Kafui"]
-        self.assertEqual(max_integer(strings), "Kafui")
+        self.assertEqual(max_integer(strings), "nye")
 
     def test_empty_string(self):
         """Test an empty string."""

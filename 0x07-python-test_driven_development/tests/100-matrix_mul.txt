@@ -1,0 +1,120 @@
+Test Cases for matrix multiplication function in module 100-matrix_mul.py
+=========================================================================
+
+The module defines the funstion `matrix_mul(m_a, m_b)`
+=====================================================
+
+How it works
+============
+Returns a new matrix which is the product of `m_a` and `m_b`
+
+
+Importing function
+	>>> matrix_mul = __import__("100-matrix_mul").matrix_mul
+
+Check for module docstring
+	>>> mod_docs = __import__("100-matrix_mul").__doc__
+	>>> len(mod_docs) > 1
+	True
+
+Check for function docstring
+	>>> fun_docs = __import__("100-matrix_mul").matrix_mul.__doc__
+	>>> len(fun_docs) > 1
+	True
+
+Providing a square matrix as arguments
+	>>> m_a = [
+	...	  [1, 3],
+	...	  [2, 4]]
+	>>> m_b = m_a
+	>>> matrix_mul(m_a, m_b)
+	[[7, 15], [10, 22]]
+
+Providing a matrix with floats as elements
+	>>> m_a = [
+	...	  [1.5, 10.0],
+	...	  [4.0, 0.5]]
+	>>> m_b = [
+	...	  [0.5, 1.2],
+	...	  [3.4, 0.75]]
+	>>> matrix_mul(m_a, m_b)
+	[[34.75, 9.3], [3.7, 5.175]]
+
+When less than than two arguments are provided
+	>>> matrix_mul() #doctest: +NORMALIZE_WHITESPACE
+	Traceback (most recent call last):
+	...
+	TypeError: matrix_mul() missing 2 required positional arguments: 
+	'm_a' and 'm_b'
+
+When matrices are not compatible
+	>>> m_b = [
+	...	  [1, 2, 3],
+	... 	  [4, 5, 6],
+	...	  [8, 9, 0]]
+	>>> matrix_mul(m_a, m_b) #doctest: +NORMALIZE_WHITESPACE
+	Traceback (most recent call last):
+	...
+	ValueError: m_a and m_b can't be multiplied
+
+When matrices are not lists
+	>>> m_a = "string1"
+	>>> matrix_mul(m_a, m_b)
+	Traceback (most recent call last):
+	...
+	TypeError: m_a must be a list
+
+	>>> m_a = [
+	...	  [1, 2, 3],
+	...	  [4, 5, 6]]
+	>>> m_b = "string2"
+	>>> matrix_mul(m_a, m_b)
+	Traceback (most recent call last):
+	...
+	TypeError: m_b must be a list
+
+When the arguments is not a list of a list
+	>>> m_a = [1, 3, 5]
+	>>> m_b = [
+	...	  [0, 2, 4]]
+	>>> matrix_mul(m_a, m_b)
+	Traceback (most recent call last):
+	TypeError: m_a must be a list of list
+
+	>>> m_a = [
+	...	  [1, 2, 3]]
+	>>> m_b = [2, 4, 6]
+	>>> matrix_mul(m_a, m_b)
+	Traceback (most recent call last):
+	...
+	TypeError: m_b must be a list of list
+
+When the arguments provided are empty
+	>>> m_a = [[]]
+	>>> m_b = [[1, 3, 5], [2, 4, 6]]
+	>>> matrix_mul(m_a, m_b)
+	Traceback (most recent call last):
+	...
+	ValueError: m_a can't be empty
+
+	>>> m_a = [[1, 3, 5], [2, 4, 6]]
+	>>> m_b = [[]]
+	>>> matrix_mul(m_a, m_b)
+	Traceback (most recent call last):
+	...
+	ValueError: m_b can't be empty
+
+When all rows of the arguments provided are not equal
+	>>> m_a = [[1, 2], [1, 4, 5]]
+	>>> m_b = [[2, 2], [7, 3]]
+	>>> matrix_mul(m_a, m_b)
+	Traceback (most recent call last):
+	...
+	TypeError: each row of m_a must be of the same size
+
+	>>> m_a = [[2, 2], [7, 3]]
+	>>> m_b = [[1, 2], [1, 4, 5]]
+	>>> matrix_mul(m_a, m_b)
+	Traceback (most recent call last):
+	...
+	TypeError: each row of m_b must be of the same size

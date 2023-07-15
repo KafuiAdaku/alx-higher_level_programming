@@ -129,10 +129,10 @@ class Rectangle(Base):
         width = self.__width
         return string.format(cls_nm, self.id, x, y, width, self.__height)
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """assigns an argument to each attribute"""
-        self.id = args[0]
-        self.__width = self.integer_validator("width", args[1])
-        self.__height = self.integer_validator("height", args[2])
-        self.__x = self.integer_validator("x", args[3])
-        self.__y = self.integer_validator("y", args[4])
+        attrs = ["id", "width", "height", "x", "y"]
+        if isinstance(args, tuple) and args:
+            for index, value in enumerate(args):
+                setattr(self, attrs[index], value)
+

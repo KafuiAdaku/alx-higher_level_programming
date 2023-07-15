@@ -102,3 +102,34 @@ class Rectangle(Base):
         return self.__width * self.__height
 
     def display(self):
+        """
+            that prints in stdout the Rectangle instance with the character #
+        """
+        breadth = 0
+        for row in range(self.__height):
+            for col in range(self.__width + self.__x):
+                while breadth < self.__y:
+                    print()
+                    breadth += 1
+                if col < self.__x:
+                    print(" ", end="")
+                else:
+                    print("#", end="")
+            print()
+
+    def __str__(self):
+        """
+            Returns a string representation of a Rectangle instance. Ex:
+            [Rectangle] <x>/<y> - <width>/<height>
+        """
+        return "[{}] ({}) {}/{} - {}/{}".\
+                format(self.__class__.__name__, self.id, self.__x, self.__y, \
+                self.__width, self.__height)
+
+    def update(self, *args):
+        """ assigns an argument to each attribute"""
+       self.id = args[0]
+       self.__width = self.integer_validator("width", args[1])
+       self.__height = self.integer_validator("height", args[2])
+       self.__x = self.integer_validator("x", args[3])
+       self.__y = self.integer_validator("y", args[4])

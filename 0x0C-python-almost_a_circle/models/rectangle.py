@@ -135,4 +135,8 @@ class Rectangle(Base):
         if isinstance(args, tuple) and args:
             for index, value in enumerate(args):
                 setattr(self, attrs[index], value)
+        else:
+            for key, value in kwargs.items():
+                if hasattr(self, key):
+                    setattr(self, key, value)
 

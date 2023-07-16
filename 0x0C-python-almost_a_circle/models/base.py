@@ -64,5 +64,27 @@ class Base:
             Args:
                 json_string (string): a string of list of dictionaries
         """
+        if json_string is None or not json_string:
+            return []
         return json.loads(json_string)
 
+    @classmethod
+    def create(cls, **dictionary):
+        """
+            returns an instance with all attributes already set
+
+            Args:
+                dictionary (dict): key word arguments
+
+            Returns:
+                object: Instance with attributes set based on the dictionary
+        """
+        if cls.__name__ == "Rectangle":
+            dummy = cls(1, 1)
+        elif cls.__name_ == "Square":
+            dummy = cls(1)
+        else:
+            dummy = cls()
+
+        dummy.update(**dictionary)
+        return dummy

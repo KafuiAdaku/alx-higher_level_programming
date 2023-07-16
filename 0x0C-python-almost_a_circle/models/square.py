@@ -29,3 +29,14 @@ class Square(Rectangle):
         width = self.width
         height = self.height
         return string.format(cls_nm, self.id, x, y, width, height)
+
+    @property
+    def size(self):
+        """Returns the size of the sqaure"""
+        return self.width
+
+    @size.setter
+    def size(self, value):
+        """Sets the size of the square"""
+        self.width = self.integer_validator("size", value)
+        self.height = self.integer_validator("size", value)

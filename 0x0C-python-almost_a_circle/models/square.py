@@ -32,11 +32,11 @@ class Square(Rectangle):
 
     @property
     def size(self):
-        """Returns the size of the sqaure"""
+        """Gets the size of the square"""
         return self.width
 
     @size.setter
+    """Sets the size of the square"""
     def size(self, value):
-        """Sets the size of the square"""
         self.width = self.integer_validator("size", value)
         self.height = self.integer_validator("size", value)

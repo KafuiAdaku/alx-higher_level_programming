@@ -15,7 +15,7 @@ class Rectangle(Base):
                 x (int): horizontal coordinate
                 y (int): vertical coordinate
         """
-        Base.__init__(self, id)
+        super().__init__(id)
         self.__width = self.integer_validator("width", width)
         self.__height = self.integer_validator("height", height)
         self.__x = self.integer_validator("x", x)
@@ -120,7 +120,7 @@ class Rectangle(Base):
     def __str__(self):
         """
         Returns a string representation of a Rectangle instance. Ex:
-        [Rectangle] <x>/<y> - <width>/<height>
+        [Rectangle] (id) <x>/<y> - <width>/<height>
         """
         string = "[{}] ({}) {}/{} - {}/{}"
         cls_nm = self.__class__.__name__
@@ -139,4 +139,3 @@ class Rectangle(Base):
             for key, value in kwargs.items():
                 if hasattr(self, key):
                     setattr(self, key, value)
-

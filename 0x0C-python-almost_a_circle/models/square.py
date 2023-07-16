@@ -36,7 +36,18 @@ class Square(Rectangle):
         return self.width
 
     @size.setter
-    """Sets the size of the square"""
     def size(self, value):
+        """Retuens the size of the square"""
         self.width = self.integer_validator("size", value)
         self.height = self.integer_validator("size", value)
+
+    def update(self, *args, **kwargs):
+        """Assigns to attributes using *args and **kwargs"""
+        attrs = ["id", "size", "x", "y"]
+        if type(args) == tuple and args:
+            for index, arg in enumerate(args):
+                setattr(self, attrs[index], arg)
+        else:
+            for key, value in kwargs.items():
+                if hasattr(self, key):
+                    setattr(self, key, value)

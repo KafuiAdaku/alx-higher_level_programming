@@ -2,6 +2,7 @@
 """My base module"""
 import json
 import os
+import csv
 
 
 class Base:
@@ -31,7 +32,7 @@ class Base:
 
             returns: a json string
         """
-        if list_dictionaries == None or not list_dictionaries:
+        if list_dictionaries is None or not list_dictionaries:
             return "[]"
         return json.dumps(list_dictionaries)
 
@@ -47,7 +48,7 @@ class Base:
         filename = cls.__name__ + ".json"
         my_list = []
         if list_objs is None:
-            with open(filename,'w', encoding='utf-8') as f:
+            with open(filename, 'w', encoding='utf-8') as f:
                 pass
 
         if list_objs is not None:
@@ -100,9 +101,60 @@ class Base:
         if os.path.exists(filename):
             with open(filename, 'r', encoding='utf-8') as f:
                 inst_json = f.read()
-            
+
             inst_list = cls.from_json_string(inst_json)
             for instance in inst_list:
                 create_inst = cls.create(**instance)
                 my_list_instances.append(create_inst)
         return my_list_instances
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """
+            serializes a list of objects to CSV
+            
+            Args:
+                list_objs (list): a list of python objects
+        """
+        if not list_objs:
+            return
+        filename = cls.__name__ + ".csv"
+        attributes = list_objs[0].to_dictionary().keys()
+        with open(filename, 'w', encoding='utf-8', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(attributes)
+            for obj in list_objs:
+               writer.writerow(obj.to_dictionary().values())
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """
+            Deserializes objects from a CSV file and returns a list of
+            objects
+        """
+        filename = cls.__name__ + ".csv"
+        if not os.path.exists(filename):
+            return []
+        obj_list = []
+        with open(filename, 'r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            header = next(reader)
+            for row in reader:
+                attributes = {k: cls.convert_attribute_value(v)
+                        for k, v in zip(header, row)}
+                obj = cls(**attributes)
+                obj_list.append(obj)
+        return obj_list
+
+    @staticmethod
+    def convert_attribute_value(value):
+        """
+            Converts attribute value to correct data type
+
+            Args:
+                value (string): Attribute value as a string
+
+            Returns:
+                Attribute value of integer type
+        """
+        return int(value)

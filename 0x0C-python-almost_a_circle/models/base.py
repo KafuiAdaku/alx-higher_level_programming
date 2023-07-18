@@ -112,7 +112,7 @@ class Base:
     def save_to_file_csv(cls, list_objs):
         """
             serializes a list of objects to CSV
-            
+
             Args:
                 list_objs (list): a list of python objects
         """
@@ -124,7 +124,7 @@ class Base:
             writer = csv.writer(f)
             writer.writerow(attributes)
             for obj in list_objs:
-               writer.writerow(obj.to_dictionary().values())
+                writer.writerow(obj.to_dictionary().values())
 
     @classmethod
     def load_from_file_csv(cls):

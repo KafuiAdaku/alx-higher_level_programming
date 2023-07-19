@@ -22,13 +22,12 @@ class Square(Rectangle):
             Returns a string representation of a Rectangle instance. Ex:
             [Square] (id) <x>/<y> - <width>/<height>
         """
-        string = "[{}] ({}) {}/{} - {}/{}"
+        string = "[{}] ({}) {}/{} - {}"
         cls_nm = self.__class__.__name__
         x = self.x
         y = self.y
         width = self.width
-        height = self.height
-        return string.format(cls_nm, self.id, x, y, width, height)
+        return string.format(cls_nm, self.id, x, y, width)
 
     @property
     def size(self):

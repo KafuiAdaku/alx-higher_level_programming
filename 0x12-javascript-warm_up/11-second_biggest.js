@@ -14,6 +14,8 @@ if (arrayLength - 2 === 0) {
     if (Number(array[index]) > max) {
       max2nd = max;
       max = array[index];
+    } else if (Number(array[index]) < max && Number(array[index]) > max2nd) {
+      max2nd = Number(array[index]);
     }
   }
   console.log(max2nd);

@@ -42,12 +42,8 @@ if __name__ == "__main__":
     cursor.execute(query, (state_name,))
 
     result = cursor.fetchall()
-    # my_list = []
-    # for row in result:
-    #    my_list.append(row[0].strip("()"))
-    # print(my_list)
 
-    my_list = [row[0].strip("()") for row in result]
+    my_list = [row[0] for row in result]
 
     for index in range(len(my_list)):
         if index != 0:

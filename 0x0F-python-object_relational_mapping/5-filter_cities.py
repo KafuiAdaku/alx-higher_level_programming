@@ -44,7 +44,7 @@ if __name__ == "__main__":
     result = cursor.fetchall()
     # my_list = []
     # for row in result:
-        # my_list.append(row[0].strip("()"))
+    #    my_list.append(row[0].strip("()"))
     # print(my_list)
 
     my_list = [row[0].strip("()") for row in result]

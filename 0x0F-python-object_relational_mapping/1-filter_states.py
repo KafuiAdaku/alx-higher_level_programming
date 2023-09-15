@@ -12,13 +12,24 @@
 """
 if __name__ == "__main__":
     import MySQLdb
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("mysql_username", type=str, help="MySQL username")
+    parser.add_argument("mysql_password", type=str, help="MySQL password")
+    parser.add_argument("database", type=str, help="database name")
+
+    args = parser.parse_args()
+    username = args.mysql_username
+    password = args.mysql_password
+    database = args.database
 
     db = MySQLdb.connect(
             host="localhost",
-            user="root",
+            user=username,
             port=3306,
-            passwd="root",
-            db="hbtn_0e_0_usa"
+            passwd=password,
+            db=database
             )
 
     cursor = db.cursor()

@@ -35,7 +35,7 @@ if __name__ == "__main__":
             port=3306,
             db=database
             )
-    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
+    query = "SELECT * FROM states WHERE BINARY name = %s ORDER BY id ASC"
     cursor = db.cursor()
     cursor.execute(query, (state_search,))
     result = cursor.fetchall()

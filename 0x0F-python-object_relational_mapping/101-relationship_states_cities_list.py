@@ -1,20 +1,21 @@
 #!/usr/bin/python3
-""" a script that lists all State objects from the database `hbtn_0e_6_usa`
+""" a script that lists all `State` objects, and corresponding `City`
+    objects, contained in the database `hbtn_0e_101_usa`.
     Your script should take 3 arguments: `mysql username`,
     `mysql password` and `database name`.
     You must use the module SQLAlchemy.
-    You must import State and Base from model_state -
-    `from model_state import Base, State`.
     Your script should connect to a MySQL server running on
     localhost at port 3306.
-    Results must be sorted in ascending order by `states.id`
-    The results must be displayed as they are in the example below
-    Your code should not be executed when imported
+    You must only use one query to the database.
+    You must use the cities relationship for all State objects
+    Results must be sorted in ascending order by states.id and cities.id
+    Your code should not be executed when imported.
 """
 if __name__ == "__main__":
     import argparse
-    from model_state import Base, State
-    from sqlalchemy import create_engine, asc, desc
+    from relationship_state import Base, State
+    from relationship_city import City
+    from sqlalchemy import create_engine, asc
     from sqlalchemy.orm import sessionmaker
 
     parser = argparse.ArgumentParser()
@@ -29,12 +30,16 @@ if __name__ == "__main__":
 
     engine = create_engine(f"mysql+mysqldb://{username}:{password}@localhost:\
             3306/{database}")
+
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    states = session.query(State).order_by(asc(State.id)).all()
+    result = session.query(State).outerjoin(City).order_by(asc(State.id),
+                                                           asc(City.id)).all()
 
-    for state in states:
+    for state in result:
         print(f"{state.id}: {state.name}")
+        for city in state.cities:
+            print(f"\t{city.id}: {city.name}")
 
-   session.close()
+    session.close()

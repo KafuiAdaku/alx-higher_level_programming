@@ -20,7 +20,7 @@ if __name__ == "__main__":
     parser.add_argument("database", type=str, help="database name")
 
     args = parser.parse_args()
-    username= args.mysql_username
+    username = args.mysql_username
     password = args.mysql_password
     database = args.database
 

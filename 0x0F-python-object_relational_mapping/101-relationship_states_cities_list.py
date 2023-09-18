@@ -33,7 +33,7 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    result = session.query(State).outerjoin(City)..all()
+    result = session.query(State).outerjoin(City).all()
     # result = session.query(State).filter(State.id).order_by(State.id).all()
     for state in result:
         print(f"{state.id}: {state.name}")

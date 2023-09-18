@@ -28,20 +28,17 @@ if __name__ == "__main__":
     password = args.mysql_password
     database = args.database
 
-    try:
-        engine = create_engine(f"mysql+mysqldb://{username}:{password}@localhost:\
-                3306/{database}")
-
-        Session = sessionmaker(bind=engine)
-        session = Session()
-    except exc.DBAPIError as err:
-        print(f"An error occurred while connecting to the database: {err}")
+    engine = create_engine(f"mysql+mysqldb://{username}:{password}@localhost:\
+            3306/{database}")
+    Base.metadata.create_all(engine)
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
     result = session.query(State).order_by(asc(State.id)).all()
     # result = session.query(State).filter(State.id).order_by(State.id).all()
     for state in result:
         print(f"{state.id}: {state.name}")
-        for city in sorted(state.cities, key=lambda x: x.id):
+        for city in state.cities:
             print(f"\t{city.id}: {city.name}")
 
     session.close()

@@ -41,7 +41,7 @@ if __name__ == "__main__":
     # result = session.query(State).filter(State.id).order_by(State.id).all()
     for state in result:
         print(f"{state.id}: {state.name}")
-        for city in state.cities:
+        for city in sorted(state.cities, key=lambda x: x.id):
             print(f"\t{city.id}: {city.name}")
 
     session.close()

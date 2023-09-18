@@ -15,7 +15,7 @@ if __name__ == "__main__":
     import argparse
     from relationship_state import Base, State
     from relationship_city import City
-    from sqlalchemy import create_engine, asc
+    from sqlalchemy import create_engine, asc, exc
     from sqlalchemy.orm import sessionmaker
 
     parser = argparse.ArgumentParser()
@@ -28,15 +28,17 @@ if __name__ == "__main__":
     password = args.mysql_password
     database = args.database
 
-    engine = create_engine(f"mysql+mysqldb://{username}:{password}@localhost:\
-            3306/{database}")
+    try:
+        engine = create_engine(f"mysql+mysqldb://{username}:{password}@localhost:\
+                3306/{database}")
 
-    Session = sessionmaker(bind=engine)
-    session = Session()
+        Session = sessionmaker(bind=engine)
+        session = Session()
+    except exc.DBAPIError as err:
+        print(f"An error occurred while connecting to the database: {err}")
 
     result = session.query(State).order_by(asc(State.id)).all()
     # result = session.query(State).filter(State.id).order_by(State.id).all()
-
     for state in result:
         print(f"{state.id}: {state.name}")
         for city in state.cities:

@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python3
 """Write a function that finds a peak in a list of unsorted integers.
     Prototype: def find_peak(list_of_integers):
     You are not allowed to import any module

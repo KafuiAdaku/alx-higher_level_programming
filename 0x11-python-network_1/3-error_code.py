@@ -7,13 +7,13 @@
 if __name__ == "__main__":
     import sys
     import urllib.request
-    from urllib.error import HTTPError, URLError
+    from urllib.error import HTTPError
 
     url = sys.argv[1]
     try:
         req = urllib.request.Request(url)
-        with  urllib.request.urlopen(req) as response:
+        with urllib.request.urlopen(req) as response:
             page = response.read()
             print(page.decode('utf-8'))
     except HTTPError as e:
-        print("Error Code: ",e.code)
+        print("Error Code: ", e.code)

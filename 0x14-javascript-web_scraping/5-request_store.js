@@ -8,12 +8,12 @@ request(url, (err, response, body) => {
   if (err) {
     console.error(err);
   } else if (response.statusCode !== 200) {
-     console.error(response && response.statusCode);
-	} else {
-        fs.writeFile(filePath, body, 'utf-8', (err) => {
-          if (err) {
-            console.error(err);
-          }
-        });
+    console.error(response && response.statusCode);
+  } else {
+    fs.writeFile(filePath, body, 'utf-8', (err) => {
+      if (err) {
+        console.error(err);
       }
+    });
+  }
 });

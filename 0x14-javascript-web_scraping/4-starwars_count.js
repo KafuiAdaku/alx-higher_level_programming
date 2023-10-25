@@ -1,7 +1,7 @@
 #!/usr/bin/node
 const url = process.argv[2];
 const request = require('request');
-const characterId =  '18';
+const characterId = '18';
 let count = 0;
 
 request(url, (err, response, body) => {
@@ -15,11 +15,11 @@ request(url, (err, response, body) => {
 
     for (const result of results) {
       const characters = result.characters;
-        for (const character of characters) {
-			if (character.includes(characterId)) {
-              count += 1;
-			}
-		}
+      for (const character of characters) {
+        if (character.includes(characterId)) {
+          count += 1;
+        }
+      }
     }
     console.log(count);
   }

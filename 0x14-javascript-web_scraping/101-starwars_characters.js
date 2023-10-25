@@ -12,18 +12,26 @@ request(movieUrl, (err, response, body) => {
     const data = JSON.parse(body);
     const characterUrls = data.characters;
 
-    characterUrls.forEach((characterUrl) => {
-      request(characterUrl, (err, response, body) => {
+    fetchCharacter(0);
+
+    function fetchCharacter (index) {
+      if (index === characterUrls.length) {
+        return;
+      }
+
+      request(characterUrls[index], (err, response, body) => {
         if (err) {
           console.error(err);
-        } else if (response.statusCode !== 200) {
-          console.error(response && response.statusCode);
-        } else {
-          const characterData = JSON.parse(body);
-          const characterName = characterData.name;
-          console.log(`${characterName}`);
+          return;
         }
+        if (response.statusCode !== 200) {
+          console.error(response && response.Status);
+          return;
+        }
+        const character = JSON.parse(body);
+        console.log(character.name);
+        fetchCharacter(++index);
       });
-    });
+    }
   }
 });

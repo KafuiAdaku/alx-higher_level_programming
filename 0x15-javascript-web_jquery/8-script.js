@@ -3,7 +3,7 @@ $(document).ready(() => {
     (data) => {
       const films = data.results;
       $.each(films, (film) => {
-        $('#list_movies').append('<li>' + film + '</li>');
+        $('UL#list_movies').append('<li>' + film + '</li>');
       });
     });
 });

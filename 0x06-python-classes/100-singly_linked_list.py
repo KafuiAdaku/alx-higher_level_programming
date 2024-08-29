@@ -8,8 +8,8 @@ class Node:
     def __init__(self, data, next_node=None):
         """initializes the node with instance variables"""
 
-        self.data = data
-        self.next_node = next_node
+        self.__data = data
+        self.__next_node = next_node
 
     @property
     def data(self):
